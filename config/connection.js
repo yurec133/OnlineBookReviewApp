@@ -14,9 +14,13 @@ export const sequelize = new Sequelize(
 
 export async function connectDB() {
     try {
-        // const connectedDataBase = await sequelize.sync();
-        console.log("Connected Database!");
+        await sequelize.authenticate();
+        console.log("Connected to the database!");
+
+        await sequelize.sync();
+        console.log("Database synchronized!");
     } catch (error) {
-        console.log("Failed connecting to database", { message: error.message });
+        console.log("Failed to connect to the database:", error.message);
     }
 }
+
